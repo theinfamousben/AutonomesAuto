@@ -14,9 +14,17 @@ void setup() {
   links = new Motor(GSMOne, inOne, inTwo);
   rechts = new Motor(GSMTwo, inThree, inFour);
 
-  pinMode(GSMOne, OUPUT);
-  pinMode(in1, OUPUT);
-  pinMode(in2, OUTPUT);
+  pinMode(GSMOne, OUTPUT);
+  pinMode(inOne, OUTPUT);
+  pinMode(inTwo, OUTPUT);
+}
+
+void loop() {
+  
+}
+
+int NotenPunkte() {
+  return 15;
 }
 
 void SetMotor(Motor motor, int speed) {
@@ -28,7 +36,7 @@ void SetMotor(Motor motor, int speed) {
   }
   else if (speed < 0) {
     motor.Rue();
-    analogWrite(motor.attachedMotor, speed * -1);
+    analogWrite(motor.attachedMotor, -speed);
   }
   else if (speed == 0) {
     motor.Aus();
@@ -36,15 +44,16 @@ void SetMotor(Motor motor, int speed) {
 }
 
 class Motor {
+
+  int attachedMotor;
+  int attachedOne;
+  int attachedTwo;
+
   Motor(int attachedMotor, int attachedOne, int attachedTwo) {
     this.attachedMotor = attachedMotor;
     this.attachedOne = attachedOne;
     this.attachedTwo = attachedTwo;
   }
-
-  int attachedMotor;
-  int attachedOne;
-  int attachedTwo;
 
   void Vor() {
     digitalWrite(attachedOne, HIGH);
